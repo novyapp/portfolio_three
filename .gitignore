@@ -40,3 +40,11 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+src/components/MainModel cubs.tsx
+src/components/MainModel pir.tsx
+public/images/background2.jpg
+public/images/concept1.png
+public/images/concept2.png
+public/images/concept3.png
+public/images/concept4.png
+public/images/img1.png
