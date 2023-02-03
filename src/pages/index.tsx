@@ -1,55 +1,15 @@
 import { type NextPage } from "next";
+import { useState } from "react";
 import Head from "next/head";
-import * as THREE from "three";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 
-import MainModel from "../components/MainModel";
-import { useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import Modal from "../components/UI/Modal";
+import { Perf } from "r3f-perf";
+import MainContent from "../components/MainContent";
+import Experience from "../components/Experience";
 
-import randomColor from "randomcolor";
-
-import image1 from "../../public/images/concept1.png";
-import image2 from "../../public/images/concept2.png";
-import image3 from "../../public/images/concept3.png";
-import image4 from "../../public/images/concept4.png";
-const images = [
-  // // Front
-  // { position: [0, 0, 1.5], rotation: [0, 0, 0], url: image1 },
-  // // Back
-  // { position: [-0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(416430) },
-  // { position: [0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452) },
-  // Left
-  {
-    position: [-2.15, 0, 1.5],
-    rotation: [0, Math.PI / 2.5, 0],
-    url: image1,
-    item: 1,
-  },
-  {
-    position: [-1.5, 0, 0.25],
-    rotation: [0, Math.PI / 6, 0],
-    url: image2,
-    item: 2,
-  },
-  // Right
-  {
-    position: [1.5, 0, 0.25],
-    rotation: [0, -Math.PI / 6, 0],
-    url: image3,
-    item: 3,
-  },
-  {
-    position: [2.15, 0, 1.5],
-    rotation: [0, -Math.PI / 2.5, 0],
-    url: image4,
-    item: 4,
-  },
-];
 const Home: NextPage = () => {
-  // const [showModal, setShowModal] = useState(false);
+  const [lep, setLep] = useState<boolean>(false);
 
   return (
     <>
@@ -59,34 +19,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full">
-        {/* <div className="absolute z-20 text-white">
-          <button onClick={() => setShowModal(true)}>
-            Show modal using a portal
-          </button>
-          {showModal &&
-            createPortal(
-              <Modal onClose={() => setShowModal(false)} />,
-              document.body
-            )}
-        </div> */}
-
-        {/* Header */}
-        {/* <div className="absolute left-10 top-32 z-10 w-1/2">
-          <div className="absolute left-0 ">
-            <h1 className="bg-gradient-to-r from-orange-400 via-pink-500  to-pink-700 bg-clip-text text-7xl font-extrabold  uppercase text-transparent">
-              Michal Nowotnik
-            </h1>
-            <h2 className="pl-3 text-lg uppercase text-white">
-              Front-End Developer | 3D Designer
-            </h2>
-          </div>
-        </div> */}
+        {!lep && <MainContent />}
         <Leva collapsed />
         <Canvas flat className="z-0">
+          <Perf />
           <ambientLight />
           <directionalLight position={[150, 150, 150]} intensity={0.55} />
-          <color args={["#000000"]} attach="background" />
-          <MainModel images={images} />
+          <color args={["#050505"]} attach="background" />
+          <Experience setLep={setLep} lep={lep} />
         </Canvas>
       </main>
     </>

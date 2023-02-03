@@ -13,7 +13,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Desk() {
+export default function Desk({ setLep }) {
   const { nodes } = useGLTF("/room.glb") as GLTFResult;
   const bakedPrinter = useTexture("./room.jpg");
 
@@ -21,10 +21,16 @@ export default function Desk() {
     <>
       <group>
         <Html position={[0, 4, 0]}>
-          <div className="rounded-md bg-zinc-900 p-2 text-zinc-300">
+          <div
+            className="rounded-md bg-zinc-900 p-2 text-zinc-300"
+            onClick={() => {
+              setLep(true);
+            }}
+          >
             Websites
           </div>
         </Html>
+
         <mesh geometry={nodes.biurko.geometry}>
           <meshBasicMaterial map={bakedPrinter} map-flipY={false} />
         </mesh>
