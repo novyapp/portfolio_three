@@ -1,19 +1,25 @@
-import React, { useRef, useState } from "react";
-import { Center, CameraControls, PerspectiveCamera } from "@react-three/drei";
-import { Group, Vector3 } from "three";
+import React, { useRef, useState, Suspense } from "react";
+import {
+  Center,
+  CameraControls,
+  PerspectiveCamera,
+  Loader,
+} from "@react-three/drei";
+import type { Group, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-
 import { Room, Desk, Rack, Printer, Chair, Bg, Plant, Boo } from "./room";
 import { useControls } from "leva";
 import * as THREE from "three";
 import WebsitesSection from "./sections/WebsitesSection";
 
-interface IMainModel {
+interface MainModelProps {
   setLep: (value: boolean) => void;
   lep: boolean;
+  setBlen: (value: boolean) => void;
+  blen: boolean;
 }
 
-function Experience({ setLep, lep }: IMainModel) {
+function Experience({ setLep, lep, blen, setBlen }: MainModelProps) {
   const meshRef = useRef<Group>(null!);
   const cameraControlsRef = useRef<CameraControls>(null!);
 
@@ -49,10 +55,8 @@ function Experience({ setLep, lep }: IMainModel) {
       step: 0.1,
     },
   });
-  console.log(focus);
-  useFrame((state, delta) => {
-    //console.log("lep", lep, "zo", zoom, "fo", state.camera);
 
+  useFrame((state, delta) => {
     zoom ? pos.set(focus.x, focus.y, focus.z + 2.2) : pos.set(8, 8, 8);
     zoom ? look.set(focus.x, focus.y, focus.z - 0.2) : look.set(0, 0, 0);
 
@@ -84,6 +88,7 @@ function Experience({ setLep, lep }: IMainModel) {
           setZoom(!zoom), setFocus(focusRef)
         )}
       />
+
       <Center>
         <group ref={meshRef}>
           <Bg />

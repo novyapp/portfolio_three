@@ -1,5 +1,5 @@
 import { useGLTF, useTexture } from "@react-three/drei";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import { useSpring, a } from "@react-spring/three";
 import { useEffect } from "react";
 
@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Chair() {
-  const { nodes } = useGLTF("/room.glb") as GLTFResult;
+  const { nodes } = useGLTF("./roomDraco.glb") as GLTFResult;
   const bakedPrinter = useTexture("./room.jpg");
 
   const [chair, apiChair] = useSpring(
@@ -33,7 +33,7 @@ export default function Chair() {
     chair();
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [apiChair]);
 
   return (
     <group position={[0.1, 0.02, -0.2]}>

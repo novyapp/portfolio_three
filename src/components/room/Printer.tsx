@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import { useGLTF, useTexture, Html } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import * as THREE from "three";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import type THREE from "three";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,7 +16,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Printer() {
-  const { nodes } = useGLTF("/room.glb") as GLTFResult;
+  const { nodes } = useGLTF("./roomDraco.glb") as GLTFResult;
   const bakedPrinter = useTexture("./room.jpg");
 
   const [extruder, apiExtruder] = useSpring(
@@ -46,7 +44,7 @@ export default function Printer() {
     bed();
 
     return () => clearTimeout(timeout);
-  }, []);
+  }, [apiExtruder, apiBed]);
 
   return (
     <group position={[-0.2, 0.2, 1.62]}>

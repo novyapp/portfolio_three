@@ -1,5 +1,5 @@
-import { useAnimations, useGLTF, useTexture } from "@react-three/drei";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import { useGLTF, useTexture } from "@react-three/drei";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -11,7 +11,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Room() {
-  const { nodes } = useGLTF("/room.glb") as GLTFResult;
+  const { nodes } = useGLTF("./roomDraco.glb") as GLTFResult;
 
   const bakedPrinter = useTexture("./room.jpg");
 

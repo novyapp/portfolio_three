@@ -1,8 +1,7 @@
 import { Html, Image, Text } from "@react-three/drei";
-import { Vector3 } from "three";
+import type { Vector3 } from "three";
 import React from "react";
-
-import { IWebsite } from "../../@types/IWebsite";
+import type { IWebsite } from "../../@types/IWebsite";
 
 interface WebsiteProps {
   website: IWebsite;
@@ -16,9 +15,9 @@ export default function WebsitePortfolio({
   return (
     <mesh
       scale={[1.5, 1.8, 0.15]}
-      position={website.position}
+      position={website.position} //eslint-disable-line
       onClick={(e) => {
-        zoomToView(e.object.position), console.log(e.object.position);
+        zoomToView(e.object.position);
       }}
     >
       <boxGeometry />

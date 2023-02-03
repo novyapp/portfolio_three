@@ -1,8 +1,5 @@
 import { useGLTF, useTexture, Html } from "@react-three/drei";
-import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import { useEffect, useRef, useState } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import AnimatedCamera from "../AnimatedCamera";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -13,8 +10,12 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Desk({ setLep }) {
-  const { nodes } = useGLTF("/room.glb") as GLTFResult;
+interface DeskProps {
+  setLep: (value: boolean) => void;
+}
+
+export default function Desk({ setLep }: DeskProps) {
+  const { nodes } = useGLTF("./roomDraco.glb") as GLTFResult;
   const bakedPrinter = useTexture("./room.jpg");
 
   return (

@@ -1,6 +1,6 @@
 import { Html, MeshReflectorMaterial } from "@react-three/drei";
 import React from "react";
-import { Vector3 } from "three";
+import type { Vector3 } from "three";
 import { dummyWebsites } from "../../data/dummyWebsites";
 import WebsitePortfolio from "./WebsitePortfolio";
 
