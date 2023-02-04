@@ -63,6 +63,8 @@ function Experience({ setLep, lep, blen, setBlen }: MainModelProps) {
     lep && !zoom && look.set(lookX, lookY, lookZ);
     lep && !zoom && pos.set(posX, posY, posZ);
 
+    console.log(state.camera.quaternion);
+
     state.camera.position.lerp(pos, 0.5);
     state.camera.updateProjectionMatrix();
 
@@ -80,7 +82,12 @@ function Experience({ setLep, lep, blen, setBlen }: MainModelProps) {
 
   return (
     <>
-      <CameraControls ref={cameraControlsRef} enabled={false} />
+      <CameraControls
+        ref={cameraControlsRef}
+        enabled={false}
+        dollySpeed={0}
+        truckSpeed={0}
+      />
       <PerspectiveCamera makeDefault />
       <WebsitesSection
         setLep={setLep}

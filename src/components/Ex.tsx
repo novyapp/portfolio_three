@@ -11,12 +11,15 @@ const Ex = () => {
   const [blen, setBlen] = useState<boolean>(false);
 
   return (
-    <Canvas flat className="z-0">
-      <color args={["#050505"]} attach="background" />
-      <ambientLight />
-      <directionalLight position={[150, 150, 150]} intensity={0.55} />
-      <Experience setLep={setLep} lep={lep} blen={blen} setBlen={setBlen} />
-    </Canvas>
+    <>
+      <Canvas flat className="z-0">
+        <Header />
+        <color args={["#050505"]} attach="background" />
+        <ambientLight />
+        <directionalLight position={[150, 150, 150]} intensity={0.55} />
+        <Experience setLep={setLep} lep={lep} blen={blen} setBlen={setBlen} />
+      </Canvas>
+    </>
   );
 };
 

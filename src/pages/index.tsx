@@ -1,9 +1,7 @@
-import { Loader } from "@react-three/drei";
 import { type NextPage } from "next";
-
 import Head from "next/head";
 import { lazy, Suspense } from "react";
-const MarkdownPreview = lazy(() => import("../components/Ex"));
+const Ex = lazy(() => import("../components/Ex"));
 
 const Home: NextPage = () => {
   return (
@@ -16,7 +14,7 @@ const Home: NextPage = () => {
 
       <main className="h-full bg-black text-white">
         <Suspense fallback={<div className="text-white">Loading</div>}>
-          <MarkdownPreview />
+          <Ex />
         </Suspense>
       </main>
     </>
