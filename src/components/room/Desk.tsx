@@ -10,28 +10,13 @@ type GLTFResult = GLTF & {
   };
 };
 
-interface DeskProps {
-  setLep: (value: boolean) => void;
-}
-
-export default function Desk({ setLep }: DeskProps) {
+export default function Desk() {
   const { nodes } = useGLTF("./roomDraco.glb") as GLTFResult;
   const bakedPrinter = useTexture("./room.jpg");
 
   return (
     <>
       <group>
-        <Html position={[0, 4, 0]}>
-          <div
-            className="rounded-md bg-zinc-900 p-2 text-zinc-300"
-            onClick={() => {
-              setLep(true);
-            }}
-          >
-            Websites
-          </div>
-        </Html>
-
         <mesh geometry={nodes.biurko.geometry}>
           <meshBasicMaterial map={bakedPrinter} map-flipY={false} />
         </mesh>
