@@ -1,7 +1,7 @@
 export const dummyWebsites = [
   {
     id: 1,
-    position: [35.2, -1.1, 0],
+    position: [35.2, 1.1, 0],
     title: "Booking System",
     description:
       "Tikma is is a one-stop solution for all your movie-watching needs. Thewebsite has a feature to set up halls with seats, so users canvisualize the seating arrangement before making their booking. The user-friendly interface makes booking movie tickets a breeze.",
@@ -12,7 +12,7 @@ export const dummyWebsites = [
   },
   {
     id: 2,
-    position: [33.2, -1.1, 0],
+    position: [33.2, 1.1, 0],
     title: "Headstamps Sorter Program",
     description:
       "Program utilizes image classification to segregate bullet heatstamps. With the ability to train the model directly within the application through labeling and capturing images from a webcam, users have the flexibility to create their own models and make use of the captured data.",
@@ -23,7 +23,7 @@ export const dummyWebsites = [
   },
   {
     id: 3,
-    position: [31.2, -1.1, 0],
+    position: [31.2, 1.1, 0],
     title: "Headstamps Sorter Program",
     description:
       "Novie is a clone of the popular streaming platform Netflix that integrates with the payment service Stripe.",

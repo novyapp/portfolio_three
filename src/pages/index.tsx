@@ -1,29 +1,32 @@
-import { Loader } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
 import { type NextPage } from "next";
+import type { OrbitControls as OrbitCintrolsImpl } from "three-stdlib";
 import Head from "next/head";
-import { createRef, Suspense, useEffect, useRef, useState } from "react";
-import Experience from "../components/Experience";
-import Overlay from "../components/Overlay";
-import { gsap } from "gsap";
-import SocialLinks from "../components/SocialLinks";
-import Menu from "../components/Menu";
+import { Suspense, useRef } from "react";
+
+import { Loader, OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+
+import { useGoSection } from "../hooks/useGoSection";
+import {
+  Bg,
+  Boo,
+  Chair,
+  Desk,
+  Plant,
+  Printer,
+  Rack,
+  Room,
+} from "../components/room";
+import Overlay from "../components/UI/Overlay";
+import WebsitesSection from "../components/sections/WebsitesSection";
+import BlenderSection from "../components/sections/BlenderSection";
+import { Animate } from "../components/Animate";
 
 const Home: NextPage = () => {
-  const [lep, setLep] = useState<boolean>(false);
-  const [blenderSection, setBlenderSection] = useState<boolean>(false);
+  const { lerping, to, target, gotoSection, zoomToSee } = useGoSection();
 
-  const ref = createRef<HTMLDivElement>();
-  const socialRef = createRef<HTMLDivElement>();
-  const menuRef = createRef<HTMLDivElement>();
+  const controlRef = useRef<OrbitCintrolsImpl>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null!);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ defaults: { duration: 1.3 } });
-    tl.fromTo(canvasRef.current, { y: "0%" }, { y: "0%" });
-    tl.fromTo(ref.current, { y: "-140%" }, { y: "0%" });
-    tl.fromTo(socialRef.current, { y: "180%" }, { y: "0%" });
-  }, []);
 
   return (
     <>
@@ -32,30 +35,42 @@ const Home: NextPage = () => {
         <meta name="description" content="Portfolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className="h-full bg-black text-white">
         <Suspense fallback={null}>
-          <Canvas flat className="z-0" ref={canvasRef}>
-            <Experience
-              setLep={setLep}
-              lep={lep}
-              blenderSection={blenderSection}
-              setBlenderSection={setBlenderSection}
+          <Canvas
+            flat
+            className="z-0"
+            camera={{ position: [5, 7, 5] }}
+            ref={canvasRef}
+          >
+            <color args={["#050505"]} attach="background" />
+            <ambientLight />
+            <directionalLight position={[150, 150, 150]} intensity={0.55} />
+            <OrbitControls ref={controlRef} target={[0, 0, 0]} />
+            <group>
+              <Bg />
+              <Room />
+              <group position={[-2.26, 1.63, 0.75]}>
+                <Desk />
+                <Printer />
+              </group>
+              <Rack />
+              <Chair />
+              <Plant />
+              <Boo />
+            </group>
+            <WebsitesSection zoomToSee={zoomToSee} gotoSection={gotoSection} />
+            <BlenderSection zoomToSee={zoomToSee} gotoSection={gotoSection} />
+            <Animate
+              controls={controlRef}
+              lerping={lerping}
+              to={to}
+              target={target}
             />
           </Canvas>
         </Suspense>
         <Loader />
-        {!lep ? (
-          <>
-            <Overlay ref={ref} />
-            <SocialLinks ref={socialRef} />
-            <Menu
-              ref={menuRef}
-              setLep={setLep}
-              setBlenderSection={setBlenderSection}
-            />
-          </>
-        ) : null}
+        <Overlay gotoSection={gotoSection} canvasAnim={canvasRef} />
       </main>
     </>
   );

@@ -5,15 +5,15 @@ import type { I3D } from "../../@types/I3D";
 
 interface BlenderProps {
   model: I3D;
-  zoomToView: (value: Vector3) => void;
+  zoomToSee: (value: Vector3) => void;
 }
 
-export default function BlenderPortfolio({ model, zoomToView }: BlenderProps) {
+export default function BlenderPortfolio({ model, zoomToSee }: BlenderProps) {
   return (
     <mesh
       position={model.position} //eslint-disable-line
       onClick={(e) => {
-        zoomToView(e.object.position);
+        zoomToSee(e.object.position);
       }}
     >
       <boxGeometry args={[2, 2, 0]} />

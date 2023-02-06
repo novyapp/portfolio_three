@@ -5,19 +5,16 @@ import type { IWebsite } from "../../@types/IWebsite";
 
 interface WebsiteProps {
   website: IWebsite;
-  zoomToView: (value: Vector3) => void;
+  zoomToSee: (value: Vector3) => void;
 }
 
-export default function WebsitePortfolio({
-  website,
-  zoomToView,
-}: WebsiteProps) {
+export default function WebsitePortfolio({ website, zoomToSee }: WebsiteProps) {
   return (
     <mesh
       scale={[1.5, 1.8, 0.15]}
       position={website.position} //eslint-disable-line
       onClick={(e) => {
-        zoomToView(e.object.position);
+        zoomToSee(e.object.position);
       }}
     >
       <boxGeometry />
@@ -28,10 +25,14 @@ export default function WebsitePortfolio({
         envMapIntensity={2}
       />
 
-      <Image position={[0, 0.26, 0.7]} scale={[0.9, 0.4]} url={website.image} />
+      <Image
+        position={[0, 0.26, 0.51]}
+        scale={[0.9, 0.4]}
+        url={website.image}
+      />
 
       <Html
-        position={[-0.31, -0.08, 1]}
+        position={[-0.3, -0.08, 0.3]}
         distanceFactor={2}
         transform
         scale={0.4}
@@ -46,7 +47,7 @@ export default function WebsitePortfolio({
         </div>
       </Html>
       <Text
-        position={[-0.43, 0, 1]}
+        position={[-0.43, 0, 0.51]}
         fontSize={0.05}
         maxWidth={0.8}
         anchorX="left"
@@ -56,7 +57,7 @@ export default function WebsitePortfolio({
         {website.title}
       </Text>
       <Text
-        position={[-0.42, -0.15, 1]}
+        position={[-0.42, -0.15, 0.51]}
         fontSize={0.03}
         maxWidth={0.8}
         anchorX="left"
